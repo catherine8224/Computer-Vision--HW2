@@ -23,6 +23,8 @@ img2 = cv2.imread('ISIA_Food500/images/Lebkuchen/Lebkuchen_0042.jpg')[:,:,::-1]
 gray_resized_img2 = cv2.resize(gray_img2, dim, interpolation = cv2.INTER_AREA)
 resized_img2 = cv2.resize(img2, dim, interpolation = cv2.INTER_AREA)
 
+
+#Arithmetic + Logarithmic
 #Addition
 addition = cv2.add(resized_img, resized_img2)
 scalar_addition = cv2.add(resized_img, (50,50,50,0))
@@ -51,54 +53,105 @@ theta_b = -255*np.log(cv2.subtract(1, gray_resized_img//255))
 theta_inverse_a = cv2.multiply(255, cv2.subtract(1, cv2.exp(cv2.subtract(cv2.multiply(theta_a, theta_b), 255))))
 #log_mult = cv2.multiply(theta_inverse_a, cv2.multiply(theta_a, theta_b))
 
-#Algebraic image Processing
+#Arithmetic Operations
 plt.figure(1, figsize=(12,10), dpi=80)
 
-plt.subplot(621),plt.imshow(resized_img)
+plt.subplot(421),plt.imshow(resized_img)
 plt.title('Image 1'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(622), plt.imshow(resized_img2)
+plt.subplot(422), plt.imshow(resized_img2)
 plt.title('Image 2'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(623), plt.imshow(addition)
+plt.subplot(423), plt.imshow(addition)
 plt.title('Alg. addition to image'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(624), plt.imshow(subtraction)
+plt.subplot(424), plt.imshow(subtraction)
 plt.title('Alg. subtraction to image'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(625), plt.imshow(scalar_addition)
+plt.subplot(425), plt.imshow(scalar_addition)
 plt.title('Scalar addition'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(626), plt.imshow(scalar_subtraction)
+plt.subplot(426), plt.imshow(scalar_subtraction)
 plt.title('Scalar subtraction'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(627), plt.imshow(division)
+plt.subplot(427), plt.imshow(division)
 plt.title('Alg. division'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(628), plt.imshow(multiplication)
+plt.subplot(428), plt.imshow(multiplication)
 plt.title('Alg. multiplication'), plt.xticks([]), plt.yticks([])
+plt.savefig("arithmetic_operations.png")
+#plt.subplot(122),plt.imshow(img,cmap = 'gray')
+#plt.show()
 
-plt.subplot(629), plt.imshow(log_add, cmap='gray')
+
+#Logic Operations
+plt.figure(1, figsize=(12,10), dpi=80)
+
+#AND
+bitwise_and = cv2.bitwise_and(resized_img, resized_img2)
+
+#OR
+bitwise_or = cv2.bitwise_or(resized_img, resized_img2)
+
+#NOT
+bitwise_not = cv2.bitwise_not(resized_img)
+bitwise_not2 = cv2.bitwise_not(resized_img2)
+
+
+#XOR
+bitwise_xor = cv2.bitwise_xor(resized_img, resized_img2)
+
+#NAND
+bitwise_nand = cv2.bitwise_not(bitwise_and)
+
+#NOR
+bitwise_nor = cv2.bitwise_not(bitwise_or)
+
+plt.figure(1, figsize=(12,10), dpi=80)
+
+plt.subplot(421),plt.imshow(bitwise_and)
+plt.title('Logic AND'), plt.xticks([]), plt.yticks([])
+
+plt.subplot(422), plt.imshow(bitwise_or)
+plt.title('Logic OR'), plt.xticks([]), plt.yticks([])
+
+plt.subplot(423), plt.imshow(bitwise_not)
+plt.title('Logic NOT-image1'), plt.xticks([]), plt.yticks([])
+
+plt.subplot(424), plt.imshow(bitwise_not2)
+plt.title('Logic NOT-image2'), plt.xticks([]), plt.yticks([])
+
+plt.subplot(425), plt.imshow(bitwise_xor)
+plt.title('Logic XOR'), plt.xticks([]), plt.yticks([])
+
+plt.subplot(426), plt.imshow(bitwise_nand)
+plt.title('Logic NAND'), plt.xticks([]), plt.yticks([])
+
+plt.subplot(427), plt.imshow(bitwise_nor)
+plt.title('Logic NOR'), plt.xticks([]), plt.yticks([])
+plt.savefig("logic_operations.png")
+#plt.show()
+
+
+#Logarithmic Operation
+plt.figure(1, figsize=(12,10), dpi=80)
+
+plt.subplot(221), plt.imshow(log_add, cmap='gray')
 plt.title('Log. addition'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(6,2, 10), plt.imshow(log_sub, cmap='gray')
+plt.subplot(2,2, 2), plt.imshow(log_sub, cmap='gray')
 plt.title('Log. subtraction'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(6,2, 11), plt.imshow(scalar_mult, cmap='gray')
+plt.subplot(2,2, 3), plt.imshow(scalar_mult, cmap='gray')
 plt.title('Log. scalar multiply'), plt.xticks([]), plt.yticks([])
 
-plt.subplot(6,2, 12), plt.imshow(theta_inverse_a, cmap='gray')
+plt.subplot(2,2, 4), plt.imshow(theta_inverse_a, cmap='gray')
 plt.title('Log. multiplication'), plt.xticks([]), plt.yticks([])
-plt.savefig("images_math_operations.png")
+plt.savefig("logarithmic_operations.png")
 #plt.subplot(122),plt.imshow(img,cmap = 'gray')
-plt.show()
+#plt.show()
 
 
 
 
-# import zipfile
-#
-# with zipfile.ZipFile(r'C:\Users\can2010\Documents\Python Scripts\Computer Vision\Project\ISIA_Food500.zip', 'r') as zipObj:
-#    # Extract all the contents of zip file in current directory
-#    zipObj.extractall()
 
